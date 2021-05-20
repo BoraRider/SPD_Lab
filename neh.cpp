@@ -21,8 +21,10 @@ using namespace std;
 *   Każda operacja wykonuje się kolejno na 1 maszynie (operacja 1 na maszynie1, op2 na masz2, op3 na masz3 itp)
 *   Każda operacja ma swój czas wykonywania
 *   Zbiór P(czas1, czas2, ... , czas_m)
-*   
 */
+
+int momentS[100][100];
+int momentC[100][100];
 
 class problem
 {
@@ -49,8 +51,7 @@ int momenty(vector<problem> zd, int operacje)
     //for(i=0;i<operacje;i++){momentS.push_back(tmp);}
     //for(i=0;i<operacje;i++){momentC.push_back(tmp);}
 
-    int momentS[10][10];
-    int momentC[10][10];
+
  
 
     for(i=0; i<zd.size(); i++)
@@ -192,7 +193,7 @@ for(int i=0; i<rozmiar ; i++){
 
 // sumowanie czasów
     int sum_czas[rozmiar];
-    cout<<"sumy czasow: "<<endl;
+    cout<<"\nsumy czasow: "<<endl;
 
     for(int i=0; i<rozmiar; i++)
     {
@@ -213,7 +214,8 @@ for(int i=0; i<rozmiar; i++){
     }
 
  
-for(int i=0; i<rozmiar; i++){
+for(int i=0; i<rozmiar; i++)
+{
     wrzucany.push_back( problematyczna_kolejka.top());
     cout<<"Wartosc: "<<wrzucany[i].index<<endl;
     problematyczna_kolejka.pop();
@@ -257,6 +259,36 @@ for(int i=0; i<rozmiar; i++)
     cmax0 = 99999;
 
 }
+//=================== wyswietlanie koncowe ===================
+    cout<<"PI: [";
+    for(int idx=0; idx<nastepny_size; idx++)
+    {
+    cout<<sprawdzany[idx].index;
+    if(idx<nastepny_size-1){
+            cout<<", ";
+        }
+    }
+    cout<<"]"<<endl;
+
+momenty(sprawdzany, operacje);
+
+    cout<<"C: [";
+    for(int idx=0; idx<nastepny_size; idx++)
+    {
+        cout<<"[ ";
+        for(int opr=0; opr<operacje; opr++)
+        {
+            cout<<momentC[idx][opr];;
+            if(opr<operacje-1){
+            cout<<", ";
+            }
+        }
+        cout<<" ]";
+    if(idx<nastepny_size-1){
+            cout<<", ";
+        }
+    }
+    cout<<"]\n\n";
 
 
     return 0;
